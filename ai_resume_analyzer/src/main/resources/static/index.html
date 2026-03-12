@@ -152,17 +152,17 @@
 
             }
 
-            if(attempts > 10){
+            if(attempts > 30){
 
                 clearInterval(interval);
 
                 document.getElementById("loading").classList.add("hidden");
 
-                alert("Analysis taking longer than expected");
+                alert("Analysis still running. Try checking history.");
 
             }
 
-        },2000);
+        },3000);
 
     }
 
