@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Analyzer</title>
+    <style>
+        body{
+            font-family: Arial;
+            background:#f5f5f5;
+            text-align:center;
+            padding:40px;
+        }
+
+        .container{
+            background:white;
+            padding:30px;
+            width:500px;
+            margin:auto;
+            border-radius:10px;
+            box-shadow:0px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        textarea{
+            width:100%;
+            height:120px;
+            margin-top:10px;
+        }
+
+        input,button{
+            margin-top:10px;
+        }
+
+        button{
+            background:#4CAF50;
+            color:white;
+            border:none;
+            padding:10px 20px;
+            cursor:pointer;
+        }
+
+        #response{
+            margin-top:20px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🚀 AI Resume Analyzer</h2>
+
+    <input type="file" id="resume"><br>
+
+    <textarea id="jobDescription" placeholder="Paste Job Description"></textarea>
+
+    <input type="text" id="userId" placeholder="User ID">
+
+    <br>
+
+    <button onclick="analyzeResume()">Analyze Resume</button>
+
+    <div id="response"></div>
+
+</div>
+
+<script>
+
+    async function analyzeResume(){
+
+        const file = document.getElementById("resume").files[0];
+        const jobDescription = document.getElementById("jobDescription").value;
+        const userId = document.getElementById("userId").value;
+
+        let formData = new FormData();
+
+        formData.append("resume", file);
+        formData.append("jobDescription", jobDescription);
+        formData.append("userId", userId);
+
+        document.getElementById("response").innerHTML = "Processing...";
+
+        const res = await fetch("/api/resume/analyze",{
+            method:"POST",
+            body:formData
+        });
+
+        const text = await res.text();
+
+        document.getElementById("response").innerHTML = text;
+
+    }
+
+</script>
+
+</body>
+</html>
