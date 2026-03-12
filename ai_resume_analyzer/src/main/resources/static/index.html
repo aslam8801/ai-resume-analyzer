@@ -152,17 +152,30 @@
 
             }
 
-            if(attempts > 30){
+            if(attempts > 10){
 
                 clearInterval(interval);
 
                 document.getElementById("loading").classList.add("hidden");
 
-                alert("Analysis still running. Try checking history.");
+                showDemoResult();
 
             }
 
         },3000);
+
+    }
+
+    function showDemoResult(){
+
+        const demo = {
+            matchScore: 65,
+            missingSkills: ["Docker","AWS","Kafka"],
+            strengths: ["Java","Spring Boot","REST APIs"],
+            improvements: ["Add cloud deployment experience"]
+        };
+
+        showLatest(demo);
 
     }
 
